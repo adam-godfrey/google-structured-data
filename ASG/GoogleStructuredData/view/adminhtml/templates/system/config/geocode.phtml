@@ -1,0 +1,131 @@
+<script>
+    require([
+        'jquery',
+        'prototype'
+    ], function(jQuery){
+
+        var geocodeSpan = jQuery('#geocode_span');
+    
+        jQuery('#geocode_button').click(function () {
+            var params = {
+                postcode: jQuery('#structured_data_address_postalCode').val()
+            };
+            new Ajax.Request('<?php echo $block->getAjaxUrl() ?>', {
+                parameters:     params,
+                loaderArea:     false,
+                asynchronous:   true,
+                onCreate: function() {
+                    geocodeSpan.find('.geocoded').hide();
+                    geocodeSpan.find('.processing').show();
+                    jQuery('#geocode_message_span').text('');
+                },
+                onSuccess: function(response) {
+                    geocodeSpan.find('.processing').hide();
+
+                    console.log(response);
+
+                    var resultText = '';
+                    if (response.status > 200) {
+                        resultText = response.statusText;
+                    } else {
+                        if(response.responseJSON.status != 200) {
+                            resultText = 'Invalid postcode';
+                        } else {
+                            resultText = 'Success';
+                            geocodeSpan.find('.geocoded').show();
+                        }
+                    }
+                    jQuery('#geocode_message_span').text(resultText);
+
+                    var json = response.responseJSON;
+
+                    if (typeof json.result != 'undefined') {
+                        jQuery('#structured_data_geo_latitude').val(json.result.latitude);
+                        jQuery('#structured_data_geo_longitude').val(json.result.longitude);
+                    }
+                }
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+        var selected = [];
+
+        jQuery('#structured_data_openinghours_days > option:selected').each(function() {
+            selected.push(jQuery(this).val());
+        });
+
+        if(jQuery('#structured_data_openinghours_usedefault > option:selected').val() == '0') {
+            hideAll();
+        } else {
+            showSelected();
+        }
+        
+        jQuery('#structured_data_openinghours_usedefault').change(function() {
+            if(jQuery(this).val() == '1') {
+                if(selected) {
+                    showSelected();
+                }
+            }
+            else {
+                hideAll();
+            }
+        });
+
+        jQuery('#structured_data_openinghours_days').change(function() {
+            selected = jQuery(this).val();
+
+            if(jQuery('#structured_data_openinghours_usedefault > option:selected').val() == '1') {
+                showSelected();
+            }
+        });
+
+        function hideAll() {
+            jQuery.each(days, function( index, value ) {
+                jQuery('#row_structured_data_openinghours_' + value).hide();
+            });
+        }
+
+        function showSelected() {
+            jQuery.each(days, function( index, value ) {
+                if(jQuery.inArray(value, Object.values(selected)) !== -1) {
+                    jQuery('#row_structured_data_openinghours_' + value).show();
+                }
+                else {
+                    jQuery('#row_structured_data_openinghours_' + value).hide();
+                    // set the open values back to 00:00:00
+                    jQuery('*[data-ui-id="time-groups-openinghours-groups-' + value + '-fields-open-value-hour"]').val('00');
+                    jQuery('*[data-ui-id="time-groups-openinghours-groups-' + value + '-fields-open-value-minute"]').val('00');
+                    jQuery('*[data-ui-id="time-groups-openinghours-groups-' + value + '-fields-open-value-second"]').val('00');
+                    // set the close values back to 00:00:00
+                    jQuery('*[data-ui-id="time-groups-openinghours-groups-' + value + '-fields-close-value-hour"]').val('00');
+                    jQuery('*[data-ui-id="time-groups-openinghours-groups-' + value + '-fields-close-value-minute"]').val('00');
+                    jQuery('*[data-ui-id="time-groups-openinghours-groups-' + value + '-fields-close-value-second"]').val('00');
+                }
+            });
+        }
+    });
+</script>
+
+<?php echo $block->getButtonHtml() ?>
+<span class="geocode-indicator" id="geocode_span">
+    <img class="processing" hidden="hidden" alt="Collecting" style="margin:0 5px" src="<?php echo $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
+    <img class="geocoded" hidden="hidden" alt="Collected" style="margin:-3px 5px" src="<?php echo $block->getViewFileUrl('images/rule_component_apply.gif') ?>"/>
+    <span id="geocode_message_span"></span>
+</span>

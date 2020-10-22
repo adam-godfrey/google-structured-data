@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<property>
+			<api>
+				<api_key/>
+				<page_number/>
+				<page_size>30</page_size>
+			</api>
+		</property>
+	</default>
+</config>

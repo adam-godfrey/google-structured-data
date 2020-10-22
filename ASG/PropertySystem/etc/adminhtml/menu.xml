@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="ASG::top_level" module="ASG_PropertySystem" resource="Magento_Backend::content" sortOrder="9999" title="ASG"/>
+		<add action="asg_propertysystem/property/index" id="ASG_PropertySystem::asg_propertysystem_property" module="ASG_PropertySystem" parent="ASG::top_level" resource="Magento_Backend::content" sortOrder="9999" title="Property"/>
+		<add id="ASG::api_configuration" title="Configuration" module="ASG_PropertySystem" sortOrder="9999" parent="ASG::top_level" action="adminhtml/system_config/edit/section/property" resource="ASG_PropertySystem::api_configuration"/>
+	</menu>
+</config>

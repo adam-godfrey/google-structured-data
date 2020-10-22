@@ -1,0 +1,166 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="asg" sortOrder="999" translate="label">
+			<label>asg</label>
+		</tab>
+		<section id="structured_data" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Google Structured Data</label>
+			<tab>asg</tab>
+			<resource>ASG_GoogleStructuredData::config_asg_googlestructureddata</resource>
+			<group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>General</label>
+				<field id="name" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Name</label>
+					<comment/>
+					<validate>required-entry</validate>
+				</field>
+				<field id="url" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="text">
+					<label>URL</label>
+					<comment>The URL of the website</comment>
+					<validate>required-entry validate-url</validate>
+				</field>
+				<field id="telephone" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50" translate="label" type="text">
+					<label>Telephone Number</label>
+					<comment/>
+					<validate>required-entry validate-number</validate>
+				</field>
+				<field id="image" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="90" translate="label" type="text">
+					<label>Image</label>
+					<comment>The URL of the image to be used in the rich text results</comment>
+					<validate>required-entry validate-url</validate>
+				</field>
+				<field id="pricerange" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+					<label>Price Range</label>
+					<comment>£0 - £000</comment>
+					<comment>In the priceRange field you can also enter £, ££ or £££ if you don’t want to use a specific number.</comment>
+				</field>
+			</group>
+			<group id="address" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label">
+				<label>Address</label>
+				<field id="streetAddress" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Street</label>
+					<comment/>
+					<validate>required-entry</validate>
+				</field>
+				<field id="addressLocality" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+					<label>Locality</label>
+					<comment/>
+				</field>
+				<field id="addressRegion" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
+					<label>Region</label>
+					<comment>County / State / Province</comment>
+				</field>
+				<field id="postalCode" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="text">
+					<label>Postcode</label>
+					<comment>Zipcode</comment>
+					<validate>required-entry</validate>
+				</field>
+			</group>
+			<group id="openinghours" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label">
+				<label>Opening Hours</label>
+				<field id="days" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Days</label>
+					<source_model>ASG\GoogleStructuredData\Model\Config\Source\ConfigOption</source_model>
+				</field>
+				<field id="usedefault" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Different Opening Hours</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment>Opening hours vary depending on day</comment>
+				</field>
+				<field id="open" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Open</label>
+					<depends>
+						<field id="structured_data/openinghours/usedefault">0</field>
+					</depends>
+				</field>
+				<field id="close" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Close</label>
+					<depends>
+						<field id="structured_data/openinghours/usedefault">0</field>
+					</depends>
+				</field>
+				<group id="monday" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label">
+					<label>Monday Opening Hours</label>
+					<field id="open" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Open</label>
+					</field>
+					<field id="close" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Close</label>
+					</field>
+				</group>
+				<group id="tuesday" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label">
+					<label>Tuesday Opening Hours</label>
+					<field id="open" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Open</label>
+					</field>
+					<field id="close" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Close</label>
+					</field>
+				</group>
+				<group id="wednesday" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label">
+					<label>Wednesday Opening Hours</label>
+					<field id="open" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Open</label>
+					</field>
+					<field id="close" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Close</label>
+					</field>
+				</group>
+				<group id="thursday" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label">
+					<label>Thursday Opening Hours</label>
+					<field id="open" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Open</label>
+					</field>
+					<field id="close" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Close</label>
+					</field>
+				</group>
+				<group id="friday" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label">
+					<label>Friday Opening Hours</label>
+					<field id="open" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Open</label>
+					</field>
+					<field id="close" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Close</label>
+					</field>
+				</group>
+				<group id="saturday" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label">
+					<label>Saturday Opening Hours</label>
+					<field id="open" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Open</label>
+					</field>
+					<field id="close" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Close</label>
+					</field>
+				</group>
+				<group id="sunday" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label">
+					<label>Sunday Opening Hours</label>
+					<field id="open" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Open</label>
+					</field>
+					<field id="close" translate="label comment" type="time" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Close</label>
+					</field>
+				</group>
+			</group>
+			<group id="geo" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label">
+				<label>Geocordinates</label>
+				<field id="latitude" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Latitude</label>
+					<comment/>
+					<validate>validate-latitude</validate>
+				</field>
+				<field id="longitude" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+					<label>Longitude</label>
+					<comment/>
+					<validate>validate-longitude</validate>
+				</field>
+				<field id="geocode" translate="button_label" sortOrder="30" showInDefault="1" showInWebsite="1">
+                    <button_label>Geocode</button_label>
+                    <frontend_model>ASG\GoogleStructuredData\Block\Adminhtml\System\Config\Geocode</frontend_model>
+                </field>
+			</group>
+		</section>
+	</system>
+</config>

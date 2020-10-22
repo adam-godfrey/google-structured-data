@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+	<group id="default">
+		<job instance="ASG\PropertySystem\Cron\ApiProperties" method="execute" name="asg_propertysystem_properties">
+			<schedule>*/1 * * * *</schedule>
+		</job>
+	</group>
+</config>

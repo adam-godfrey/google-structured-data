@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="ASG_PropertySystem::Property" sortOrder="10" title="Property">
+					<resource id="ASG_PropertySystem::Property_save" sortOrder="10" title="Save Property"/>
+					<resource id="ASG_PropertySystem::Property_delete" sortOrder="20" title="Delete Property"/>
+					<resource id="ASG_PropertySystem::Property_update" sortOrder="30" title="Update Property"/>
+					<resource id="ASG_PropertySystem::Property_view" sortOrder="40" title="View Property"/>
+					<resource id="ASG_PropertySystem::api_configuration" sortOrder="50" title="API Configuration"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

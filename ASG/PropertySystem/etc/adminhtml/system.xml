@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="asg" sortOrder="999" translate="label">
+			<label>ASG</label>
+		</tab>
+		<section id="property" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Property System</label>
+			<tab>asg</tab>
+			<resource>ASG_PropertySystem::config_asg_propertysystem</resource>
+			<group id="api" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>API Credentials</label>
+				<field id="api_key" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>API Key</label>
+					<comment/>
+					<validate>required-entry</validate>
+				</field>
+				<field id="page_number" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+					<label>Page Number</label>
+					<comment>Page to load from the resource.</comment>
+					<validate>required-entry validate-digits validate-not-negative-number</validate>
+				</field>
+				<field id="page_size" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
+					<label>Page Size</label>
+					<comment>Number of results per page (default 30, max 100).</comment>
+					<validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-0-100</validate>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>
