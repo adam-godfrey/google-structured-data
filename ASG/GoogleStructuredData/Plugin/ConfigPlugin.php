@@ -20,17 +20,32 @@ class ConfigPlugin
         Config $subject
     ) {
         $tmp = [];
+        $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
         $groups = $subject->getGroups();
+        $opendays = $groups['openinghours']['fields']['days']['value'];
 
         if($groups['openinghours']['fields']['usedefault']['value'] == '0') {
-            foreach(['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'] as $day) {
-                $groups['openinghours']['fields'][$day]['value'][0] = null;
-                $groups['openinghours']['fields'][$day]['value'][1] = null;
+            foreach($days as $day) {
+                for($i = 0; $i < 3; $i++) {
+                    $groups['openinghours']['groups'][$day]['fields']['open']['value'][$i] = null;
+                    $groups['openinghours']['groups'][$day]['fields']['close']['value'][$i] = null;
+                }
             }
         }
         else {
-            $groups['openinghours']['fields']['defaulthours']['value'][0] = null;
-            $groups['openinghours']['fields']['defaulthours']['value'][0] = null;
+            foreach($days as $day) {
+                if(!in_array($day, $opendays)) {
+                    for($i = 0; $i < 3; $i++) {
+                        $groups['openinghours']['groups'][$day]['fields']['open']['value'][$i] = null;
+                        $groups['openinghours']['groups'][$day]['fields']['close']['value'][$i] = null;
+                    }
+                }
+            }
+
+            for($i = 0; $i < 3; $i++) {
+                $groups['openinghours']['fields']['open']['value'][$i] = null;
+                $groups['openinghours']['fields']['close']['value'][$i] = null;
+            }
         }
 
         return $subject->setGroups($groups);        

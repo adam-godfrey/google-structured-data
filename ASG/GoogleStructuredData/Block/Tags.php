@@ -100,17 +100,17 @@ class Tags extends Template
             }
 
             foreach($daygroups as $daygroup) {
-                $opening = new \stdClass();
+                $obj = new \stdClass();
 
-                $opening->{'@type'} = 'OpeningHoursSpecification';
-                $opening->dayOfWeek = array_map('ucwords', $daygroup['days']);
-                $opening->opens = $daygroup['open'];
-                $opening->closes = $daygroup['close'];
+                $obj->{'@type'} = 'OpeningHoursSpecification';
+                $obj->dayOfWeek = array_map('ucwords', $daygroup['days']);
+                $obj->opens = $daygroup['open'];
+                $obj->closes = $daygroup['close'];
 
-                $openings[] = $opening;
+                $opening[] = $obj;
             } 
         }
 
-        return $openings;
+        return $opening;
     }
 }
